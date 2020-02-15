@@ -6,12 +6,13 @@
 .vfs-draggable{
 	flex-grow : 2;
 	min-width : 25%;
-	border-right: 2px solid rgba(10, 10, 10, 0.1411764705882353);
+	/* border-right: 2px solid rgba(10, 10, 10, 0.1411764705882353); */
 
 	
 }
 .vfs-flowchart{
 	flex-grow : 8;
+	height : 90%;
 }
 
 .vfs-source-return{
@@ -59,7 +60,7 @@
 }
 
 h4.headers{
-	box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.26);
+	/* box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.26); */
     height: 24px;
     text-align: center;
     padding: 2px;

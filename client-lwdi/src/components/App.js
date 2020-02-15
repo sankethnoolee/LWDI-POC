@@ -106,8 +106,10 @@ class App extends React.Component{
 		this.state.entities.forEach((t)=>{
 				flowchartDetails.entities.push(
 					<Draggable 
+						defaultPosition={{x: 0, y: 0}}
 						bounds = "parent"
-						key = {t.nodeId}>
+						key = {t.nodeId}
+						style = {{position : "absolute" , top : 0 , left : 0}}>
 						<div 
 						className = {classMapForSources[t.type]}
 						>
@@ -137,7 +139,7 @@ class App extends React.Component{
 					<div
 						onDragOver = {(e)=>this.onDragOver(e)}
 						onDrop = {(e)=>this.onDrop(e,"flowChart")}
-						style={{ position: 'relative', overflow: 'auto', padding: '10px', height : "80%", width : "100%"}}>
+						style={{ position: 'relative', overflow: 'auto', padding: '10px', height : "100%", width : "100%",boxShadow: "1px 1px 6px 2px #00000040"}}>
 							{flowchartDetails.entities}
 					</div>
 					
