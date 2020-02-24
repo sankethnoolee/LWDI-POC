@@ -1,10 +1,11 @@
 import React from 'react';
 
-import './App.css'
+import './connections.css'
 import {curve} from './curve';
 
 
-class App extends React.Component{
+
+class Connections extends React.Component{
 	constructor(){
 		super();
 		//state init
@@ -183,4 +184,4 @@ class App extends React.Component{
  
 }
 
-export default App;
+export default Connections;

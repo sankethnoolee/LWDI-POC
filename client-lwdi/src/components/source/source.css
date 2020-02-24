@@ -1,0 +1,100 @@
+.entity-container{
+	    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.vfs-draggable{
+	flex-grow : 2;
+	min-width : 25%;
+	/* border-right: 2px solid rgba(10, 10, 10, 0.1411764705882353); */
+
+	
+}
+.vfs-flowchart{
+	flex-grow : 8;
+	height : 90%;
+}
+
+.vfs-source-return{
+	height: 100px;
+    width: 160px;
+    background: #c7eeff;
+    border: 1px solid #00BCD4;
+    border-radius: 10px;
+	padding : 4px;
+	color: #0082bd;
+	cursor: grab;
+    
+}
+
+.vfs-source-csv{
+	height: 100px;
+    width: 160px;
+    background: #dbffb2;
+    border: 1px solid #4CAF50;
+    border-radius: 10px;
+	padding : 4px;
+	color : #008000;
+	cursor: grab;
+	
+}
+
+.vfs-source-db-table{
+	height: 100px;
+    width: 160px;
+    background: #ffffa0;
+    border: 1px solid #FFEB3B;
+    border-radius: 10px;
+	padding : 4px;
+	color : #FF9800;
+	cursor: grab;
+}
+
+.vfs-entity-header{
+	display : flex;
+}
+
+.vfs-entity-name{
+	width : 85%;
+	font-weight: 600;
+}
+
+h4.headers{
+	/* box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.26); */
+    height: 24px;
+    text-align: center;
+    padding: 2px;
+    /* width: 90%; */
+    /* margin: auto auto; */
+}
+
+
+.entity-short{
+	height: 32px;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 0px 8px 4px 8px;
+	cursor: grab;
+}
+
+.vfs-source-return-short{
+    border: 1px solid #00BCD4;
+	color: #0082bd;
+    
+}
+
+.vfs-source-csv-short{
+    border: 1px solid #4CAF50;
+	color : #008000;
+	
+}
+
+.vfs-source-db-table-short{
+    border: 1px solid #FFEB3B;
+	color : #FF9800;
+}
+
+.flowCharContainer{
+	position: relative; overflow: auto; padding: 10px; height : 100%; width : 100%;box-shadow: 1px 1px 6px 2px #00000040;
+}

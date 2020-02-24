@@ -1,9 +1,24 @@
 export const curve = (startPos, endPos) => {
+	
+  /*
+	this this method which calculates the curve
+	which needs to be specified for the connection
+	
+	
+	> if needed straight lines set curve to zero.
+	> if needed less curve increase the param CURVE_LEVEL
+	> if needed less curve decrease the param CURVE_LEVEL
+	
+	refer svg path for M x y C curve params 
+	
+	
+  */
   const width = Math.abs(startPos.x - endPos.x)
   const height = Math.abs(startPos.y - endPos.y)
   const leftToRight = startPos.x < endPos.x
   const topToBottom = startPos.y < endPos.y
   const isHorizontal = width > height
+  const CURVE_LEVEL = 3
 
   let start
   let end
@@ -15,7 +30,7 @@ export const curve = (startPos, endPos) => {
     end = topToBottom ? endPos : startPos
   }
 
-  const curve = isHorizontal ? width / 2 : height / 2
+  const curve = isHorizontal ? width / CURVE_LEVEL : height / CURVE_LEVEL
   const curveX = isHorizontal ? curve : 0
   const curveY = isHorizontal ? 0 : curve
 
