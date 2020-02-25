@@ -25,6 +25,7 @@ const sourceListReducer  = (state = {} ,action) => {
 const sourceDetailReducer  = (state = [] ,action) => {
 	switch(action.type){
 		case ADD_SOURCE:
+		console.log(action)
 		var flowChartSources = state?state : []
 			return [...flowChartSources,action.payload];
 		case MOVE_SOURCE:

@@ -3,8 +3,13 @@ import {combineReducers} from 'redux';
 //for form use this.
 
 //import {reducer as formReducer} from 'redux-form';
-import {sourceListReducer, sourceDetailReducer} from './sourceReducers';
-
+import {sourceListReducer,
+		sourceDetailReducer
+	} from './sourceReducers';
+import {
+	drawConnectionReducer,
+	addConnection
+	} from './connectionReducers';
 
 
 
@@ -12,5 +17,6 @@ import {sourceListReducer, sourceDetailReducer} from './sourceReducers';
 
 export default combineReducers({
 	sourceList : sourceListReducer,
-	flowChartSources : sourceDetailReducer
+	flowChartSources : sourceDetailReducer,
+	connectionDetails : drawConnectionReducer,
 })
