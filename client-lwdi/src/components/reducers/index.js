@@ -3,7 +3,9 @@ import {combineReducers} from 'redux';
 //for form use this.
 
 //import {reducer as formReducer} from 'redux-form';
-import {sourceListReducer,
+import {
+		updateListWidth,
+		sourceListReducer,
 		sourceDetailReducer
 	} from './sourceReducers';
 import {
@@ -16,6 +18,7 @@ import {
 //redux form shoild be assigned with the key form
 
 export default combineReducers({
+	listDim : updateListWidth,
 	sourceList : sourceListReducer,
 	flowChartSources : sourceDetailReducer,
 	connectionDetails : drawConnectionReducer,

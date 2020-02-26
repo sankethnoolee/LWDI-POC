@@ -12,10 +12,7 @@ import {
 		mouseMoveNode,
 		mouseDownNode,
 		mouseUpNode,
-		mouseOutNode,
-		mouseDownConnection,
-		mouseUpConnection,
-		mouseMoveConnection
+		mouseOutNode
 	} from './../actions'
 const classMapForSources = CLASS_MAP_FOR_SOURCES
 
@@ -27,43 +24,27 @@ class SourceDetail extends React.Component {
 	handleMouseDownOnNode = (e) =>{
 		//e.mouseEvent.button
 		e.preventDefault();
-		this.props.mouseDownNode(e);
+		this.props.mouseDownNode(e, this.props.listWidth ,this.props.listHeight);
 		
 	}
 	handleMouseMoveOnNode = (e) =>{
 		//handle drop connections
 		e.preventDefault();
-		this.props.mouseMoveNode(e);
+		this.props.mouseMoveNode(e , this.props.listWidth,this.props.listHeight);
 	}
 	
 	handleMouseUpOnNode = (e) =>{
 		//e.mouseEvent.button
 		e.preventDefault();
-		this.props.mouseUpNode(e);
+		this.props.mouseUpNode(e , this.props.listWidth,this.props.listHeight);
 		
 		
 	}
 	
 	handleMouseOutOnNode = (e) =>{
 		e.preventDefault();
-		this.props.mouseOutNode(e);
+		this.props.mouseOutNode(e , this.props.listWidth,this.props.listHeight);
 	}
-	
-	handleMouseDown = (e) =>{
-		e.preventDefault();
-	}
-	handleMouseMove = (e) =>{
-		e.preventDefault();
-		//handle drop connections
-		this.props.mouseMoveConnection(e)
-		
-	}
-	
-	handleMouseUp = (e) =>{
-		//e.mouseEvent.button
-		this.props.mouseUpConnection();
-	}
-	
 	
 	
 	render(){
@@ -75,7 +56,7 @@ class SourceDetail extends React.Component {
 						bounds = "parent"
 						key = {nodeId}
 			>
-						<div className = "drag-container">
+						<div className = "drag-container" style = {{position: 'absolute', top: '0px', left: '0px'}}>
 							<div className = "connection-input-parent"
 							
 								onMouseDown={this.handleMouseDownOnNode}
@@ -112,7 +93,8 @@ class SourceDetail extends React.Component {
 
 const mapStateToProps = (state ,  ownState) => {
 	return {
-		
+		listWidth : state.listDim.w,
+		listHeight : state.listDim.h
 	}
 }
 
@@ -120,9 +102,6 @@ export default connect(mapStateToProps,{
 	mouseMoveNode : mouseMoveNode,
 	mouseDownNode : mouseDownNode,
 	mouseUpNode : mouseUpNode,
-	mouseOutNode : mouseOutNode,
-	mouseDownConnection : mouseDownConnection,
-	mouseUpConnection : mouseUpConnection,
-	mouseMoveConnection : mouseMoveConnection
+	mouseOutNode : mouseOutNode
 	
 })(SourceDetail);

@@ -57,12 +57,34 @@ const drawConnectionReducer  = (state = {
 			}
 			return state;
 		case MOUSE_UP_NODE :
-			
+			if(state.src){
+				var srcO = state.src;
+				srcO.y = srcO.y -11.5;
+				return {...state,
+					isDrawing : false,
+					src : {
+						  x : 0,
+						  y : 0
+					  },
+					  tgt : {
+						  x : 0,
+						  y : 0
+					  },
+					connectionList  : [...state.connectionList, {src : srcO , tgt : action.payload.tgt , connectionId : connectionId()}]
+				};
+			}
 			return {...state,
-				isDrawing : false,
-				tgt : action.payload.tgt,
-				connectionList  : [...state.connectionList, {src : state.src , tgt : action.payload.tgt , connectionId : connectionId()}]
-			};
+					isDrawing : false,
+					src : {
+						  x : 0,
+						  y : 0
+					  },
+					  tgt : {
+						  x : 0,
+						  y : 0
+					  }
+				};
+			
 		case MOUSE_DOWN_NODE :
 			return {...state,
 				isDrawing : true,

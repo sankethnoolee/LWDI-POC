@@ -1,13 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import {connect} from 'react-redux';
 import './source.css';
 
 import {
 		addSource,
-		mouseMoveNode,
-		mouseDownNode,
-		mouseUpNode,
-		mouseOutNode,
+		updateListWidth,
 		mouseDownConnection,
 		mouseUpConnection,
 		mouseMoveConnection
@@ -21,6 +19,12 @@ import Connections from './../connections/Connections';
 
 
 class Source extends React.Component{
+	
+	componentDidMount(){
+		var elm = ReactDOM.findDOMNode(this.refs.entityListingContainer);
+		this.props.updateListWidth(elm.clientWidth, ReactDOM.findDOMNode(this.refs.flowChartContainer).getBoundingClientRect().top);
+	}
+	
 	onDragOver = (e)=>{
 		e.preventDefault();
 		
@@ -53,37 +57,13 @@ class Source extends React.Component{
 		return srcArr;
 	}
 	
-	handleMouseDownOnNode = (e) =>{
-		//e.mouseEvent.button
-		e.preventDefault();
-		this.props.mouseDownNode(e);
-		
-	}
-	handleMouseMoveOnNode = (e) =>{
-		//handle drop connections
-		e.preventDefault();
-		this.props.mouseMoveNode(e);
-	}
-	
-	handleMouseUpOnNode = (e) =>{
-		//e.mouseEvent.button
-		e.preventDefault();
-		this.props.mouseUpNode(e);
-		
-	}
-	
-	handleMouseOutOnNode = (e) =>{
-		e.preventDefault();
-		this.props.mouseOutNode(e);
-	}
-	
 	handleMouseDown = (e) =>{
 		e.preventDefault();
 	}
 	handleMouseMove = (e) =>{
 		e.preventDefault();
 		//handle drop connections
-		this.props.mouseMoveConnection(e)
+		this.props.mouseMoveConnection(e,this.props.listWidth,this.props.listHeight);
 		
 	}
 	
@@ -108,9 +88,10 @@ class Source extends React.Component{
 	}
 	
 	render(){
+		
 		return (
 			<div className = "entity-container">
-				<div className = "droppable vfs-draggable" onDragOver = {(e)=>this.onDragOver(e)}>
+				<div ref = "entityListingContainer" className = "droppable vfs-draggable" onDragOver = {(e)=>this.onDragOver(e)}>
 					<h4 className = "headers">
 						Entities
 					</h4>
@@ -122,6 +103,7 @@ class Source extends React.Component{
 					</h4>
 					
 					<div
+						ref = "flowChartContainer"
 						className = "flowCharContainer"
 						onDragOver = {(e)=>this.onDragOver(e)}
 						onDrop = {(e)=>this.onDrop(e,"flowChart")}
@@ -160,17 +142,16 @@ const mapStateToProps = (state,ownState) =>{
 		sourceMap : state.sourceList.sourceMap?state.sourceList.sourceMap:{},
 		src : state.connectionDetails.src ? state.connectionDetails.src : {x: 0 ,y : 0},
 		tgt : state.connectionDetails.tgt ? state.connectionDetails.tgt : {x: 0 ,y : 0},
-		connectionList :  state.connectionDetails.connectionList ? state.connectionDetails.connectionList : []
+		connectionList :  state.connectionDetails.connectionList ? state.connectionDetails.connectionList : [],
+		listWidth : state.listDim.w,
+		listHeight : state.listDim.h
 	}
 }
 
 export default connect(mapStateToProps,{
 	addSource : addSource,
-	mouseMoveNode : mouseMoveNode,
-	mouseDownNode : mouseDownNode,
-	mouseUpNode : mouseUpNode,
-	mouseOutNode : mouseOutNode,
 	mouseDownConnection : mouseDownConnection,
 	mouseUpConnection : mouseUpConnection,
-	mouseMoveConnection : mouseMoveConnection
+	mouseMoveConnection : mouseMoveConnection,
+	updateListWidth : updateListWidth
 })(Source);

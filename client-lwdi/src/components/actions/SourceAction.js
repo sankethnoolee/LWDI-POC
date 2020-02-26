@@ -1,7 +1,8 @@
 import {nodeId} from './../helpers/RandomIdGenerator';
 import {
 	RENDER_SOURCES,
-	ADD_SOURCE
+	ADD_SOURCE,
+	LIST_WIDTH
 	
 } from './../LWDIProps';
 
@@ -60,5 +61,12 @@ export const addSource = (srcObj) =>  {
 	return {
 		type : ADD_SOURCE,
 		payload : {...srcObj , nodeId : nodeId()}
+	}
+}
+
+export const updateListWidth = (w,h) => {
+	return {
+		type : LIST_WIDTH,
+		payload : {w,h}
 	}
 }

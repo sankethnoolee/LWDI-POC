@@ -24,34 +24,41 @@ export const mouseMoveNode = (e) => {
 };
 
 
-export const mouseDownNode = (e) => {
+export const mouseDownNode = (e, w , h) => {
+	const rect = e.target.parentElement.parentElement.getBoundingClientRect();
+	const elm = e.target.parentElement.parentElement;
+	const yPos = rect.top+(elm.clientHeight/2)-h;
+	const xPos = rect.left-w;
 	
 	return {
 		type : MOUSE_DOWN_NODE,
 		payload : {
 			isDrawing : true,
 			src : {
-				  x : e.clientX - 341,
-				  y : e.clientY-10
+				  x : xPos,
+				  y : yPos
 			  },
 			tgt : {
-				  x : e.clientX - 341 ,
-				  y : e.clientY-10
+				  x : xPos ,
+				  y : yPos
 			  }
 		}
 	}
 };
 
-export const mouseUpNode = (e) => {
-	
+export const mouseUpNode = (e, w , h) => {
+	const rect = e.target.parentElement.parentElement.getBoundingClientRect();
+	const elm = e.target.parentElement.parentElement;
+	const yPos = rect.top+(elm.clientHeight/2)-h;
+	const xPos = rect.left-w;
 	return {
 		type : MOUSE_UP_NODE,
 		payload : {
 			
 			isDrawing : false,
 			tgt : {
-				  x : e.clientX - 341,
-				  y : e.clientY-10
+				  x : xPos,
+				  y : yPos-11.5
 			  }
 		}
 	}
@@ -83,14 +90,14 @@ export const mouseUpConnection = (e) => {
 }
 
 
-export const mouseMoveConnection = (e) => {
-	
+export const mouseMoveConnection = (e,w,h) => {
 	return {
+		
 		type : MOUSE_MOVE_CONNECTION,
 		payload : {
 			tgt : {
-					x : e.clientX - 341,
-					y : e.clientY-10
+					x : e.clientX-10-w,
+					y : e.clientY - h
 			}
 			
 		}

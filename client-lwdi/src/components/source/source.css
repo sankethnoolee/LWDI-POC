@@ -147,4 +147,5 @@ h4.headers{
 	width: 200px;
     height: 100px;
     display: flex;
+	z-index : 1;
 }

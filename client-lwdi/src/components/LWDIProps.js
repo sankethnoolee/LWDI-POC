@@ -20,6 +20,7 @@ export const MOUSE_MOVE_NODE = "MOUSE_MOVE_NODE";
 export const MOUSE_UP_NODE = "MOUSE_UP_NODE";
 export const MOUSE_DOWN_NODE = "MOUSE_DOWN_NODE";
 export const MOUSE_OUT_NODE = "MOUSE_OUT_NODE";
+export const LIST_WIDTH = "LIST_WIDTH";
 
 
 

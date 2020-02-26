@@ -9,7 +9,6 @@ class Connections extends React.Component{
 	
 	render(){
 		var {src , tgt , connectionId}  = this.props
-		console.log(this.props)
 		return (
 		   
 			    <svg id = {connectionId} style={{ overflow: 'visible', position: 'absolute', cursor: 'pointer', left: 0, right: 0 }}>
