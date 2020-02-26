@@ -144,7 +144,7 @@ h4.headers{
 }
 
 .drag-container{
-	width: 200px;
+	width: 192px;
     height: 100px;
     display: flex;
 	z-index : 1;

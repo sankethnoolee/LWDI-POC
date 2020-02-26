@@ -50,9 +50,7 @@ class SourceDetail extends React.Component {
 	render(){
 		var {type , name , nodeId} = this.props;
 		return (
-			<Draggable cancel = "div.connection-input-parent"
-						start={{ left: 0, right: 0}}
-						defaultPosition={{x: 0, y: 0}}
+			<Draggable cancel = "div.connection-input-parent,div.connection-output-parent"
 						bounds = "parent"
 						key = {nodeId}
 			>

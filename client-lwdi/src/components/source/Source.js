@@ -78,7 +78,7 @@ class Source extends React.Component{
 		this.props.connectionList.forEach((t)=>{
 			
 			
-			c.push( <Connections 
+			c.push( <Connections key = {t.connectionId}
 				src = {t.src}
 				tgt = {t.tgt}
 				connectionId = {t.connectionId}>

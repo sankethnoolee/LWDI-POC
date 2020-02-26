@@ -25,10 +25,11 @@ export const mouseMoveNode = (e) => {
 
 
 export const mouseDownNode = (e, w , h) => {
+	const isInput = e.target.className!=="output-connection";
 	const rect = e.target.parentElement.parentElement.getBoundingClientRect();
 	const elm = e.target.parentElement.parentElement;
-	const yPos = rect.top+(elm.clientHeight/2)-h;
-	const xPos = rect.left-w;
+	const yPos = (rect.top+(elm.clientHeight/2)-h);
+	const xPos = isInput?(rect.left-w):rect.right-w;
 	
 	return {
 		type : MOUSE_DOWN_NODE,
@@ -47,10 +48,11 @@ export const mouseDownNode = (e, w , h) => {
 };
 
 export const mouseUpNode = (e, w , h) => {
+	const isInput = e.target.className!=="output-connection";
 	const rect = e.target.parentElement.parentElement.getBoundingClientRect();
 	const elm = e.target.parentElement.parentElement;
-	const yPos = rect.top+(elm.clientHeight/2)-h;
-	const xPos = rect.left-w;
+	const yPos = (rect.top+(elm.clientHeight/2)-h);
+	const xPos = isInput?(rect.left-w):rect.right-w;
 	return {
 		type : MOUSE_UP_NODE,
 		payload : {
