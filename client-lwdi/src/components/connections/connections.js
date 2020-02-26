@@ -6,8 +6,9 @@ import {curve} from './curve';
 
 
 class Connections extends React.Component{
-	onConnectionClick = (c) =>{
-		
+	onConnectionClick = (c,e) =>{
+		var elm = e.target;
+		elm.parentElement.remove();
 	}
 	onConnectionHover = (c,e) =>{
 		e.target.setAttribute('stroke-width',6)
@@ -22,7 +23,7 @@ class Connections extends React.Component{
 			    <svg id = {connectionId} key = {connectionId} style={{ overflow: 'visible', position: 'absolute', cursor: 'pointer', left: 0, right: 0 }}>
 					{/* Main line */}
 					  <path
-						onClick = {()=>{this.onConnectionClick(connectionId)}}
+						onClick = {(e)=>{this.onConnectionClick(connectionId,e)}}
 						onMouseEnter = {(e)=>{this.onConnectionHover(connectionId,e)}}
 						onMouseLeave = {(e)=>{this.onConnectionLeave(connectionId,e)}}
 						d={curve({x:src.x,y:src.y}, {x:tgt.x,y:tgt.y})}
