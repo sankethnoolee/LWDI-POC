@@ -7,7 +7,8 @@ import {
 	MOUSE_UP_NODE,
 	MOUSE_DOWN_NODE,
 	MOUSE_OUT_NODE,
-	ADD_CONNECTION
+	ADD_CONNECTION,
+	UPDATE_CONNECTION
 	
 } from './../LWDIProps';
 import {connectionId} from './../helpers/RandomIdGenerator';
@@ -23,7 +24,8 @@ const drawConnectionReducer  = (state = {
 			  x : 0,
 			  y : 0
 		  },
-		 connectionList : []
+		 connectionList : [],
+		 nodeToConnectionMap : {}
 		} ,action) => {
 	
 	
@@ -58,8 +60,12 @@ const drawConnectionReducer  = (state = {
 			return state;
 		case MOUSE_UP_NODE :
 			if(state.src){
+				var cId = connectionId();
 				var srcO = state.src;
+				var scrId = srcO.nodeId;
+				var tgtId = action.payload.tgt.nodeId;
 				srcO.y = srcO.y -11.5;
+				
 				return {...state,
 					isDrawing : false,
 					src : {
@@ -70,7 +76,9 @@ const drawConnectionReducer  = (state = {
 						  x : 0,
 						  y : 0
 					  },
-					connectionList  : [...state.connectionList, {src : srcO , tgt : action.payload.tgt , connectionId : connectionId()}]
+					connectionList  : [...state.connectionList, {src : srcO , tgt : action.payload.tgt , connectionId :cId }],
+					nodeToConnectionMap : {...state.nodeToConnectionMap , [scrId] : state.nodeToConnectionMap[scrId]?[...state.nodeToConnectionMap[scrId],cId]:[cId] , [tgtId] : state.nodeToConnectionMap[tgtId]?[...state.nodeToConnectionMap[tgtId],cId]:[cId] }
+					
 				};
 			}
 			return {...state,
@@ -92,6 +100,31 @@ const drawConnectionReducer  = (state = {
 				tgt : action.payload.tgt
 			};
 		case MOUSE_OUT_NODE : return {...state, targetFound : false};
+		case UPDATE_CONNECTION : 
+		var connectionArr = state.connectionList;
+		var updatedConn = [];
+		var affectedConnArr = action.payload.listOfConnections;
+		var nodeId = action.payload.nodeId;
+		for(let i = 0 ;i < connectionArr.length ; i++ ){
+			if(affectedConnArr.indexOf(connectionArr[i].connectionId)>-1){
+				
+				if(connectionArr[i].src.nodeId===nodeId){
+					connectionArr[i].src.x=action.payload.srcX
+					connectionArr[i].src.y=action.payload.srcY
+				}
+				if(connectionArr[i].tgt.nodeId===nodeId){
+					connectionArr[i].tgt.x=action.payload.tgtX
+					connectionArr[i].tgt.y=action.payload.srcY
+				}
+				
+				
+			}
+			updatedConn.push(connectionArr[i]);
+			
+			
+		}
+		
+		return {...state,connectionList : updatedConn }
 		default : 
 			return state;
 	}

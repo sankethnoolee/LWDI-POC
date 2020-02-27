@@ -25,12 +25,13 @@ export const mouseMoveNode = (e) => {
 
 
 export const mouseDownNode = (e, w , h) => {
-const isParent = e.target.className ==="connection-input-parent" | e.target.className ==="connection-output-parent";
+	const isParent = e.target.className ==="connection-input-parent" | e.target.className ==="connection-output-parent";
 	const isInput = e.target.className!=="output-connection" && e.target.className !=="connection-output-parent";
 	const rect = isParent?e.target.parentElement.getBoundingClientRect():e.target.parentElement.parentElement.getBoundingClientRect();
 	const elm = isParent?e.target.parentElement:e.target.parentElement.parentElement;
 	const yPos = (rect.top+(elm.clientHeight/2)-h);
 	const xPos = isInput?(rect.left-w):rect.right-w;
+	const nodeId = isParent?e.target.getAttribute("node-id"):e.target.parentElement.getAttribute("node-id")
 	
 	return {
 		type : MOUSE_DOWN_NODE,
@@ -38,11 +39,13 @@ const isParent = e.target.className ==="connection-input-parent" | e.target.clas
 			isDrawing : true,
 			src : {
 				  x : xPos,
-				  y : yPos
+				  y : yPos,
+				  nodeId : nodeId
 			  },
 			tgt : {
 				  x : xPos ,
-				  y : yPos
+				  y : yPos,
+				  nodeId : nodeId
 			  }
 		}
 	}
@@ -55,7 +58,8 @@ export const mouseUpNode = (e, w , h) => {
 	const elm = isParent?e.target.parentElement:e.target.parentElement.parentElement;
 	const yPos = (rect.top+(elm.clientHeight/2)-h);
 	const xPos = isInput?(rect.left-w):rect.right-w;
-	console.log(e.target.getAttribute("node-id"))
+	const nodeId = isParent?e.target.getAttribute("node-id"):e.target.parentElement.getAttribute("node-id")
+	
 	return {
 		type : MOUSE_UP_NODE,
 		payload : {
@@ -63,7 +67,8 @@ export const mouseUpNode = (e, w , h) => {
 			isDrawing : false,
 			tgt : {
 				  x : xPos,
-				  y : yPos-11.5
+				  y : yPos-11.5,
+				  nodeId : nodeId
 			  }
 		}
 	}

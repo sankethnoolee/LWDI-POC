@@ -2,7 +2,8 @@ import {nodeId} from './../helpers/RandomIdGenerator';
 import {
 	RENDER_SOURCES,
 	ADD_SOURCE,
-	LIST_WIDTH
+	LIST_WIDTH,
+	UPDATE_CONNECTION
 	
 } from './../LWDIProps';
 
@@ -68,5 +69,18 @@ export const updateListWidth = (w,h) => {
 	return {
 		type : LIST_WIDTH,
 		payload : {w,h}
+	}
+}
+
+export const updateConnections = (listOfConnections = [],nodeId, e,w,h,rect,elm) => {
+	console.log(e)
+	var srcY=rect.top +(elm.clientHeight/2)-h-11.5
+	var srcX=rect.right-w
+	var tgtX=rect.left-w
+	return {
+		type : UPDATE_CONNECTION,
+		payload : {listOfConnections,
+					nodeId,srcY,srcX,tgtX
+		}
 	}
 }

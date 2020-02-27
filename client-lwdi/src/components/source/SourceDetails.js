@@ -12,14 +12,33 @@ import {
 		mouseMoveNode,
 		mouseDownNode,
 		mouseUpNode,
-		mouseOutNode
+		mouseOutNode,
+		updateConnections
 	} from './../actions'
 const classMapForSources = CLASS_MAP_FOR_SOURCES
 
 
 
 class SourceDetail extends React.Component {
+	
+	/*
+	TODO : 
+	
+	currently on drop of target is removed 
+	and on start from src is removed
+	
+	
+	ideal way to handle back flush auto connect to src n targets if the node is matched
+		
+	
+	*/
+	
+	
 	//connection functions remove it after testing
+	componentDidMount(){
+		
+		this.setState({nodeId : this.props.nodeId})
+	}
 	
 	handleMouseDownOnNode = (e) =>{
 		//e.mouseEvent.button
@@ -46,18 +65,33 @@ class SourceDetail extends React.Component {
 		this.props.mouseOutNode(e , this.props.listWidth,this.props.listHeight);
 	}
 	
+	  onStart = (nid) => {
+		//console.log(nid);
+	  };
+
+	  onStop = (nid) => {
+		//console.log(nid);
+	  };
+	  
+	  onDrag = (nid,e) => {
+
+		this.props.updateConnections(this.props.connections,nid,e , this.props.listWidth,this.props.listHeight, document.getElementById(nid).getBoundingClientRect(),document.getElementById(nid));
+	  };
+	
 	
 	render(){
 		var {type , name , nodeId , yInit , xInit} = this.props;
+		const dragHandlers = {onStart: ()=>{this.onStart(nodeId)}, onStop: ()=>{this.onStop(nodeId)} , onDrag : (e)=>{this.onDrag(nodeId,e)}};
 		return (
-			<Draggable cancel = "div.connection-input-parent,div.connection-output-parent"
+			<Draggable {...dragHandlers} 
+						cancel = "div.connection-input-parent,div.connection-output-parent"
 						bounds = "parent"
 						key = {nodeId}
 			>
-						<div className = "drag-container" style = {{position: 'absolute', top: yInit+"px", left: xInit+"px"}}>
+						<div id  = {nodeId} className = "drag-container" style = {{position: 'absolute', top: yInit+"px", left: xInit+"px"}}>
 							<div node-id = {nodeId} className = "connection-input-parent"
 							
-								onMouseDown={this.handleMouseDownOnNode}
+								//onMouseDown={this.handleMouseDownOnNode}
 								onMouseMove={this.handleMouseMoveOnNode}
 								onMouseUp={this.handleMouseUpOnNode}
 								onMouseOut={this.handleMouseOutOnNode}
@@ -73,11 +107,11 @@ class SourceDetail extends React.Component {
 								<div className = "additional-info">{nodeId}</div>
 							
 							</div>
-							<div className = "connection-output-parent"
+							<div node-id = {nodeId} className = "connection-output-parent"
 							
 								onMouseDown={this.handleMouseDownOnNode}
-								onMouseMove={this.handleMouseMoveOnNode}
-								onMouseUp={this.handleMouseUpOnNode}
+								//onMouseMove={this.handleMouseMoveOnNode}
+								//onMouseUp={this.handleMouseUpOnNode}
 								onMouseOut={this.handleMouseOutOnNode}
 							
 							><div className="output-connection"></div></div>
@@ -92,7 +126,9 @@ class SourceDetail extends React.Component {
 const mapStateToProps = (state ,  ownState) => {
 	return {
 		listWidth : state.listDim.w,
-		listHeight : state.listDim.h
+		listHeight : state.listDim.h,
+		connections : state.connectionDetails.nodeToConnectionMap?state.connectionDetails.nodeToConnectionMap[ownState.nodeId] : []
+		
 	}
 }
 
@@ -100,6 +136,7 @@ export default connect(mapStateToProps,{
 	mouseMoveNode : mouseMoveNode,
 	mouseDownNode : mouseDownNode,
 	mouseUpNode : mouseUpNode,
-	mouseOutNode : mouseOutNode
+	mouseOutNode : mouseOutNode,
+	updateConnections : updateConnections
 	
 })(SourceDetail);
