@@ -48,13 +48,13 @@ class SourceDetail extends React.Component {
 	
 	
 	render(){
-		var {type , name , nodeId} = this.props;
+		var {type , name , nodeId , yInit , xInit} = this.props;
 		return (
 			<Draggable cancel = "div.connection-input-parent,div.connection-output-parent"
 						bounds = "parent"
 						key = {nodeId}
 			>
-						<div className = "drag-container" style = {{position: 'absolute', top: '0px', left: '0px'}}>
+						<div className = "drag-container" style = {{position: 'absolute', top: yInit+"px", left: xInit+"px"}}>
 							<div className = "connection-input-parent"
 							
 								onMouseDown={this.handleMouseDownOnNode}

@@ -57,10 +57,10 @@ export const fetchSources = () => {
 }
 
 
-export const addSource = (srcObj) =>  {
+export const addSource = (srcObj , e,w,h) =>  {
 	return {
 		type : ADD_SOURCE,
-		payload : {...srcObj , nodeId : nodeId()}
+		payload : {...srcObj , nodeId : nodeId(),xPos : e.clientX - w,yPos : e.clientY - h}
 	}
 }
 

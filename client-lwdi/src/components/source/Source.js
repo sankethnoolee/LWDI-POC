@@ -34,7 +34,7 @@ class Source extends React.Component{
 		
 		let id = e.dataTransfer.getData("id");
 		if(id !=null && id !==""){
-			this.props.addSource(this.props.sourceMap[id]);
+			this.props.addSource(this.props.sourceMap[id],e,this.props.listWidth,this.props.listHeight);
 		}
 		e.dataTransfer.setData("id",null);
 	}
@@ -49,6 +49,8 @@ class Source extends React.Component{
 					name  = {s.name}
 					nodeId = {s.nodeId}
 					key = {s.nodeId}
+					xInit = {s.xPos}
+					yInit = {s.yPos}
 				
 				></SourceDetails>
 			)
