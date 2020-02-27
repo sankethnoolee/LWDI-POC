@@ -55,7 +55,7 @@ class SourceDetail extends React.Component {
 						key = {nodeId}
 			>
 						<div className = "drag-container" style = {{position: 'absolute', top: yInit+"px", left: xInit+"px"}}>
-							<div className = "connection-input-parent"
+							<div node-id = {nodeId} className = "connection-input-parent"
 							
 								onMouseDown={this.handleMouseDownOnNode}
 								onMouseMove={this.handleMouseMoveOnNode}
