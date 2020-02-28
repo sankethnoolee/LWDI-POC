@@ -85,7 +85,7 @@ class SourceDetail extends React.Component {
 		return (
 			<Draggable {...dragHandlers} 
 						cancel = "div.connection-input-parent,div.connection-output-parent"
-						bounds = "parent"
+						
 						key = {nodeId}
 			>
 						<div id  = {nodeId} className = "drag-container" style = {{position: 'absolute', top: yInit+"px", left: xInit+"px"}}>

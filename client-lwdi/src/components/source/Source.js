@@ -22,6 +22,7 @@ class Source extends React.Component{
 	
 	componentDidMount(){
 		var elm = ReactDOM.findDOMNode(this.refs.entityListingContainer);
+		console.log(ReactDOM.findDOMNode(this.refs.flowChartContainer).getBoundingClientRect().top)
 		this.props.updateListWidth(elm.clientWidth, ReactDOM.findDOMNode(this.refs.flowChartContainer).getBoundingClientRect().top);
 	}
 	

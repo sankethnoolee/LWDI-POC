@@ -73,10 +73,14 @@ export const updateListWidth = (w,h) => {
 }
 
 export const updateConnections = (listOfConnections = [],nodeId, e,w,h,rect,elm) => {
-	console.log(e)
-	var srcY=rect.top +(elm.clientHeight/2)-h-11.5
-	var srcX=rect.right-w
-	var tgtX=rect.left-w
+	var translate = elm.style.transform.split("translate(").join("").split(")").join("").split(",");
+	var tY = Number(translate[1].split("px").join(""))
+	var tX = Number(translate[0].split("px").join(""))
+	var srcY=Number(elm.style.top.split("px").join("")) +(tY)+(elm.clientHeight/2)-11.5
+	var srcX=Number(elm.style.left.split("px").join("")) +(tX)+ elm.clientWidth
+	
+	console.log(elm.style)
+	var tgtX=Number(elm.style.left.split("px").join("")) +(tX)
 	return {
 		type : UPDATE_CONNECTION,
 		payload : {listOfConnections,

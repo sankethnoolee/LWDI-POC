@@ -101,30 +101,31 @@ const drawConnectionReducer  = (state = {
 			};
 		case MOUSE_OUT_NODE : return {...state, targetFound : false};
 		case UPDATE_CONNECTION : 
-		var connectionArr = state.connectionList;
-		var updatedConn = [];
-		var affectedConnArr = action.payload.listOfConnections;
-		var nodeId = action.payload.nodeId;
-		for(let i = 0 ;i < connectionArr.length ; i++ ){
-			if(affectedConnArr.indexOf(connectionArr[i].connectionId)>-1){
-				
-				if(connectionArr[i].src.nodeId===nodeId){
-					connectionArr[i].src.x=action.payload.srcX
-					connectionArr[i].src.y=action.payload.srcY
+			console.log(action.payload)
+			var connectionArr = state.connectionList;
+			var updatedConn = [];
+			var affectedConnArr = action.payload.listOfConnections;
+			var nodeId = action.payload.nodeId;
+			for(let i = 0 ;i < connectionArr.length ; i++ ){
+				if(affectedConnArr.indexOf(connectionArr[i].connectionId)>-1){
+					
+					if(connectionArr[i].src.nodeId===nodeId){
+						connectionArr[i].src.x=action.payload.srcX
+						connectionArr[i].src.y=action.payload.srcY
+					}
+					if(connectionArr[i].tgt.nodeId===nodeId){
+						connectionArr[i].tgt.x=action.payload.tgtX
+						connectionArr[i].tgt.y=action.payload.srcY
+					}
+					
+					
 				}
-				if(connectionArr[i].tgt.nodeId===nodeId){
-					connectionArr[i].tgt.x=action.payload.tgtX
-					connectionArr[i].tgt.y=action.payload.srcY
-				}
+				updatedConn.push(connectionArr[i]);
 				
 				
 			}
-			updatedConn.push(connectionArr[i]);
 			
-			
-		}
-		
-		return {...state,connectionList : updatedConn }
+			return {...state,connectionList : updatedConn }
 		default : 
 			return state;
 	}
